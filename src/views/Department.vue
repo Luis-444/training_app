@@ -7,7 +7,7 @@
    const showCreateModal = ref(false);
    const showEdithModal = ref(false);
    const showDeleteModal = ref(false);
-   const departments = ref([]);
+   const departments = ref<Department[]>([]);
 
     const openCreateModal = () => {
         showCreateModal.value = true;
@@ -25,16 +25,16 @@
         department.value = defaultDepartment;
     }
 
-
     onMounted(() => {
+        console.log("Si me estoy ejecutando");
         getDepartments();
     })
 
     const getDepartments = () => {
         axiosClient.get('departments')
             .then((response) => {
-                departments.value = response.data;
-                console.log(response.data);
+                departments.value = response.data.departments;
+                console.log(response);
             })
             .catch((error) => {
                 console.log(error.response.data);
@@ -77,6 +77,9 @@
 
 <template>
     <div>
+        <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Crear 
+            </button>
         <!-- Tabla de departamnetos -->
         <div class="flex flex-col overflow-x-auto">
         <div class="">

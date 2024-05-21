@@ -13,6 +13,9 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Home',
         component: Home,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/login',

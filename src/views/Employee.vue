@@ -96,7 +96,7 @@
                             </div>
                             <div class="mb-5">
                                 <label for="abbreviation" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">Departamento:</label>
-                                <input id="abbreviation" type="text" v-model="employee.department_id" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="" required>
+                                <input id="abbreviation" type="text" v-model="employee.department.name" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="" required>
                             </div>
                             <div class="mb-5">
                                 <label for="abbreviation" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">Procedimientos:</label>
