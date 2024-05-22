@@ -26,7 +26,6 @@
     }
 
     onMounted(() => {
-        console.log("Si me estoy ejecutando");
         getDepartments();
     })
 
@@ -79,7 +78,7 @@
     <div>
         <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Crear 
-            </button>
+        </button>
         <!-- Tabla de departamnetos -->
         <div class="flex flex-col overflow-x-auto">
         <div class="">
@@ -97,9 +96,6 @@
                             <tr v-for="dep in departments" :key="dep.id" class="border-b dark:border-neutral-500">
                                 <td class="whitespace-nowrap flex px-6 py-4">
                                     <!-- Botón para abrir el modal --> 
-                                    <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Crear 
-                                    </button>
                                     <button @click="openEdithModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Editar 
                                     </button>

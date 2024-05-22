@@ -21,4 +21,22 @@ axiosClient.interceptors.request.use(
     }
 );
 
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Si el error es de autenticación, eliminar el token
+      const tokenStore = useTokenStore();
+      tokenStore.setToken('');
+      localStorage.removeItem('token');
+      
+      // Redirigir al usuario a la página de inicio de sesión
+      window.location.href = '/login'; // Cambia esto a la URL de tu página de inicio de sesión
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default axiosClient;

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import axiosClient from '../axios';
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import { Employee, defaultEmployee } from '../types';
 
     const employee = ref<Employee>(defaultEmployee);
@@ -8,6 +8,7 @@
     const showCreateModal = ref(false);
     const showEdithModal = ref(false);
     const showDeleteModal = ref(false);
+    const employees = ref<Employee[]>([]);
 
     const openCreateModal = () => {
         showCreateModal.value = true;
@@ -23,6 +24,21 @@
         showEdithModal.value = false;
         showDeleteModal.value = false;
         employee.value = defaultEmployee;
+    }
+
+    onMounted(() => {
+        getEmployees();
+    })
+
+    const getEmployees = () => {
+        axiosClient.get('employees')
+            .then((response) => {
+                employees.value = response.data.employees;
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
     }
    
     const createEmployee = () => {
@@ -60,17 +76,47 @@
 </script>
 
 <template>
-    <div class="">
-        <!-- Botón para abrir el modal --> 
-        <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Crear empleado
+            <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Crear 
         </button>
-        <button @click="openEdithModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Editar empleado
-        </button>
-        <button @click="openDeleteModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Eliminar empleado
-        </button>
+        <!-- Tabla de departamnetos -->
+        <div class="flex flex-col overflow-x-auto">
+        <div class="">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div class="overflow-x-auto">
+                    <table class="text-left text-sm font-light">
+                        <thead class="border-b font-medium dark:border-neutral-500">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">Acciones:</th>
+                                <th scope="col" class="px-6 py-4">Iniciales:</th>
+                                <th scope="col" class="px-6 py-4">Nombre</th>
+                                <th scope="col" class="px-6 py-4">Numero de empleado:</th>
+                                <th scope="col" class="px-6 py-4">Departamento:</th>
+                                <th scope="col" class="px-6 py-4">Procedimiento:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="emp in employees" :key="emp.id" class="border-b dark:border-neutral-500">
+                                <td class="whitespace-nowrap flex px-6 py-4">
+                                    <!-- Botón para abrir el modal --> 
+                                    <button @click="openEdithModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Editar 
+                                    </button>
+                                    <button @click="openDeleteModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Eliminar 
+                                    </button>
+                                </td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ emp.initials }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ emp.name }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ emp.employee_number }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ emp.department ? emp.department.name : "No asigado" }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ emp.procedure_id }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <!-- Modal de creacion -->
         <div v-show="showCreateModal" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

@@ -31,11 +31,15 @@ export interface Department {
     id: number;
     name: string;
     abbreviation: string;
+    procedure_id: number;
+    procedure: Procedure;
 }
 export const defaultDepartment: Department = {
     id: 0,
     name: '',
     abbreviation: '',
+    procedure_id: 0,
+    procedure: defaultProcedure
 }
 
 //Employees
@@ -46,6 +50,8 @@ export interface Employee {
     employee_number: number;
     department_id: number;
     procedure_id: number;
+    department: Department;
+    procedure: Procedure;
 }
 export const defaultEmployee: Employee = {
     id: 0,
@@ -54,4 +60,6 @@ export const defaultEmployee: Employee = {
     employee_number: 0,
     department_id: 0,
     procedure_id: 0,
+    procedure: defaultProcedure,
+    department: defaultDepartment
 }
