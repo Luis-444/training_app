@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-   import axiosClient from '../axios';
-   import { ref, onMounted } from 'vue';
-   import { Procedure, defaultProcedure } from '../types';
+    import axiosClient from '../axios';
+    import { ref, onMounted } from 'vue';
+    import { Procedure, defaultProcedure } from '../types';
+    import Main from '../layouts/Main.vue';
+    import Menu from '../layouts/Menu.vue';
 
    const procedure = ref<Procedure>(defaultProcedure);
     const showCreateModal = ref(false);
@@ -19,7 +21,7 @@
     const openDeleteModal = (id: number) => {
         showDeleteModal.value = true;
         procedureToDeleteId.value = id;
-        console.log(procedureToDeleteId);
+        console.log(procedureToDeleteId.value);
     };
     const closeModal = () => {
         showCreateModal.value = false;
@@ -83,11 +85,15 @@
 </script>
 
 <template>
-        <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Crear 
-        </button>
+    <Main></Main>
+    <div class="flex">
+        <Menu></Menu>
         <!-- Tabla de departamnetos -->
-        <div class="flex flex-col overflow-x-auto">
+        <div>
+            <button @click="openCreateModal" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Crear 
+            </button>
+        </div>
         <div class="">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-x-auto">
@@ -118,6 +124,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="flex flex-col">
         <!-- Modal de creacion -->
         <div v-show="showCreateModal" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

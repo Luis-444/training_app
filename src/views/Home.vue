@@ -4,6 +4,8 @@
     import { defaultUser } from '../types';
     import axiosClient from '../axios';
     import router from '../router';
+    import Main from '../layouts/Main.vue';
+    import Menu from '../layouts/Menu.vue';
 
     const logout = () => {
         axiosClient.post('logout')
@@ -18,9 +20,15 @@
 </script>
 
 <template>
-    <div>
-        <button v-on:click="logout">
-            Logout
-        </button>
+    <Main>
+        <div>
+            <button v-on:click="logout">
+                Logout
+            </button>
+        </div>
+    </Main>
+    <div class="flex">
+        <Menu>
+        </Menu>
     </div>
 </template>

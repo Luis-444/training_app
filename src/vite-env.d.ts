@@ -10,9 +10,9 @@ export default defineConfig({
       '@': "/src",
       '@components': "/src/components",
       '@views': "/src/views",
+      '@layouts': "/src/layouts",
       /* '@assets': "/src/assets", */
-      /* '@layouts': "/src/layouts",
-      '@router': "/src/router", */
+      /*'@router': "/src/router", */
     }
   }
 })
