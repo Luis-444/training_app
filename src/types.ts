@@ -51,7 +51,7 @@ export interface Employee {
     department_id: number;
     procedure_id: number;
     department: Department;
-    procedure: Procedure;
+    procedures: Procedure[];
 }
 export const defaultEmployee: Employee = {
     id: 0,
@@ -60,6 +60,6 @@ export const defaultEmployee: Employee = {
     employee_number: 0,
     department_id: 0,
     procedure_id: 0,
-    procedure: defaultProcedure,
+    procedures: [],
     department: defaultDepartment
 }

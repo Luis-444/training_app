@@ -1,31 +1,25 @@
 <script lang="ts" setup>
-    
+import LogoutButton from "../components/LogoutButton.vue";
 </script>
 
 <template>
-    <div class=" h-screen w-1/5 border border-r-black p-10">
-        <div class="border border-b-black border-r-white border-t-white border-l-white">
-            <P class="">Informacion</P>
-        </div>
-        <ul class="list-outside pt-2">
-            <li>
-                <a href="/" class="text-black underline underline-offset-8">Home</a>
-            </li>
-        </ul>
-        <br>
-        <div class="border border-b-black border-r-white border-t-white border-l-white">
-            <p class="">Catálogos</p>
-        </div>
+    <nav class="w-[200px] md:w-[250px] lg:w-[300px] border border-r-black">
         <ul class="pt-2">
-            <li>
-                <a class="text-black" href="/departments">Departamentos</a>
+            <span class="px-2">Informacion</span>
+            <li class="py-2 transition-colors bg-gray-900 hover:bg-gray-950">
+                <router-link class="block px-6" to="/">Home</router-link>
             </li>
-            <li>
-                <a class="text-black" href="/procedures">Procedimientos</a>
+            <li class="py-2 transition-colors bg-gray-900 hover:bg-gray-950">
+                <router-link class="block px-6" to="/departments">Departamentos</router-link>
             </li>
-            <li>
-                <a class="text-black underline underline-offset-8" href="/employees">Empleados</a>
+            <span class="px-2">Catalogos</span>
+            <li class="py-2 transition-colors bg-gray-900 hover:bg-gray-950">
+                <router-link class="block px-6" to="/procedures">Procedimientos</router-link>
+            </li>
+            <li class="py-2 transition-colors bg-gray-900 hover:bg-gray-950">
+                <router-link class="block px-6" to="/employees">Empleados</router-link>
             </li>
         </ul>
-    </div>
+        <LogoutButton />
+    </nav>
 </template>
