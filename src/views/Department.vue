@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-   import axiosClient from '../axios';
-   import { onMounted, ref } from 'vue';
-   import { Department, defaultDepartment } from '../types';
+    import axiosClient from '../axios';
+    import { onMounted, ref } from 'vue';
+    import { Department, defaultDepartment } from '../types';
+    import Main from '../layouts/Main.vue';
+    import Menu from '../layouts/Menu.vue';
    
    const department = ref<Department>(defaultDepartment);
    const showCreateModal = ref(false);
@@ -75,39 +77,44 @@
 </script>
 
 <template>
-    <div>
-        <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Crear 
-        </button>
-        <!-- Tabla de departamnetos -->
-        <div class="flex flex-col overflow-x-auto">
-        <div class="">
-            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div class="overflow-x-auto">
-                    <table class="text-left text-sm font-light">
-                        <thead class="border-b font-medium dark:border-neutral-500">
-                            <tr>
-                                <th scope="col" class="px-6 py-4">Acciones</th>
-                                <th scope="col" class="px-6 py-4">Abreviatura:</th>
-                                <th scope="col" class="px-6 py-4">Nombre:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="dep in departments" :key="dep.id" class="border-b dark:border-neutral-500">
-                                <td class="whitespace-nowrap flex px-6 py-4">
-                                    <!-- Botón para abrir el modal --> 
-                                    <button @click="openEdithModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Editar 
-                                    </button>
-                                    <button @click="openDeleteModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Eliminar 
-                                    </button>
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4"> {{ dep.abbreviation }}</td>
-                                <td class="whitespace-nowrap px-6 py-4">{{ dep.name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <Main></Main>
+        <div class="flex">
+            <Menu></Menu>
+            <div>
+                <button @click="openCreateModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Crear 
+                </button>
+            </div>
+            <!-- Tabla de departamnetos -->
+            <div class="flex flex-col overflow-x-auto">
+            <div class="">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                    <div class="overflow-x-auto">
+                        <table class="text-left text-sm font-light">
+                            <thead class="border-b font-medium dark:border-neutral-500">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4">Acciones</th>
+                                    <th scope="col" class="px-6 py-4">Abreviatura:</th>
+                                    <th scope="col" class="px-6 py-4">Nombre:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="dep in departments" :key="dep.id" class="border-b dark:border-neutral-500">
+                                    <td class="whitespace-nowrap flex px-6 py-4">
+                                        <!-- Botón para abrir el modal --> 
+                                        <button @click="openEdithModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Editar 
+                                        </button>
+                                        <button @click="openDeleteModal" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Eliminar 
+                                        </button>
+                                    </td>
+                                    <td class="whitespace-nowrap px-6 py-4"> {{ dep.abbreviation }}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ dep.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -210,7 +217,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </template>
