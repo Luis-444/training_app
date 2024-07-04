@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 //User
 export interface User {
     id: number;
@@ -25,6 +27,8 @@ export const defaultProcedure: Procedure = {
     acm_number: '',
     name: '',
 }
+
+export const procedures = ref<Procedure[]>([]);
 
 //Departmets
 export interface Department {
