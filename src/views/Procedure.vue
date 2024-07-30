@@ -11,7 +11,7 @@
     import DangerButton from "../components/buttons/DangerButton.vue";
     import { copyJson } from "../utils/commons";
 
-   const procedure = ref<Procedure>(defaultProcedure);
+    const procedure = ref<Procedure>(defaultProcedure);
     const showCreateModal = ref(false);
     const showEdithModal = ref(false);
     const showDeleteModal = ref(false);
@@ -93,7 +93,7 @@
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton @click="openCreateModal" text="Nuevo Procedimineto" />
+            <PrimaryButton :type="'button'" @click="openCreateModal" text="Nuevo Procedimineto" />
         </template>
         <!-- Tabla de departamnetos -->
         <div class="">

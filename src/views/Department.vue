@@ -3,7 +3,6 @@ import axiosClient from "../axios";
 import { onMounted, ref } from "vue";
 import { Department, defaultDepartment } from "../types";
 import Main from "../layouts/Main.vue";
-import Menu from "../layouts/Menu.vue";
 import Modal from "../components/Modal.vue";
 import TextInput from "../components/TextInput.vue";
 import { UserIcon, UsersIcon } from "@heroicons/vue/20/solid";
@@ -102,7 +101,7 @@ const DeleteDepartment = () => {
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton @click="openCreateModal" text="Nuevo departamento" />
+            <PrimaryButton type="button" @click="openCreateModal" text="Nuevo departamento" />
         </template>
         <div class="flex flex-col overflow-x-auto">
             <div class="">
@@ -160,7 +159,7 @@ const DeleteDepartment = () => {
                 </div>
             </div>
         </div>
-        <Modal :showing="showCreateModal">
+        <Modal :showing="showCreateModal" :close="clear">
             <template #title>
                 <h2 class="text-lg font-medium text-white">
                     {{ department.id === 0 ? 'Nuevo Departamento' : 'Editar departamento' }}
@@ -219,7 +218,7 @@ const DeleteDepartment = () => {
                                 </div>
                                 <div class="px-3">
                                     <button
-                                        @click.prevent="closeModal"
+                                        @click.prevent="clear"
                                         type="button"
                                         class="flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                     >

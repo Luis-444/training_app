@@ -2,6 +2,7 @@
 import Main from "../layouts/Main.vue";
 import { onMounted, ref } from "vue";
 import axiosClient from "../axios";
+import { Employee, Procedure } from '../types';
 
 const columns = ref([
     "Numero de empleado",
@@ -10,8 +11,8 @@ const columns = ref([
     "Job description",
 ]);
 
-const employees = ref([]);
-const procedures = ref([]);
+const procedures = ref<Procedure[]>([]);
+const employees = ref<Employee[]>([]);
 onMounted(() => {
     axiosClient.get("procedures").then((response) => {
         console.log(response.data);
@@ -34,13 +35,13 @@ onMounted(() => {
         <table>
             <thead>
                 <tr class="truncate">
-                    <th class="border" v-for="column in columns" :key="column">
+                    <th class="border" v-for="(column, index) in columns" :key="index">
                         <template v-if="Array.isArray(column)">
                             <table>
                                 <tr
                                     class="border"
-                                    v-for="subColumn in column"
-                                    :key="subColumn"
+                                    v-for="(subColumn, index) in column"
+                                    :key="index"
                                 >
                                     <td>{{ subColumn }}</td>
                                 </tr>

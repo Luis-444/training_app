@@ -16,6 +16,8 @@ import Modal from "../components/Modal.vue";
 import { Department } from "../types";
 import { copyJson } from "../utils/commons";
 
+import { UserIcon, UsersIcon } from "@heroicons/vue/20/solid";
+
 const employee = ref<Employee>(copyJson(defaultEmployee));
 
 const showCreateModal = ref(false);
@@ -42,11 +44,13 @@ const openEdithModal = (emp: Employee) => {
 const openDeleteModal = () => {
     showDeleteModal.value = true;
 };
-const closeModal = () => {
+const clear = () => {
     showCreateModal.value = false;
     showEdithModal.value = false;
     showDeleteModal.value = false;
-    employee.value = defaultEmployee;
+    setTimeout(() => {
+        employee.value = copyJson(defaultEmployee);
+    }, 500);
 };
 
 onMounted(() => {
@@ -135,7 +139,7 @@ const addProcedure = () => {
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton @click="openCreateModal" text="Nuevo empleado" />
+            <PrimaryButton type="button" @click="openCreateModal" text="Nuevo empleado" />
         </template>
         <div class="flex flex-col overflow-x-auto">
             <div class="">
@@ -213,7 +217,7 @@ const addProcedure = () => {
                 </div>
             </div>
         </div>
-        <Modal :showing="showCreateModal">
+        <Modal :showing="showCreateModal" :close="clear">
             <template #title>
                 <h2 class="text-lg font-medium text-white">
                     {{
@@ -295,7 +299,7 @@ const addProcedure = () => {
             </template>
             <template #footer>
                 <PrimaryButton
-                    :loading="loading"
+                    :loading="true"
                     @click="createEmployee"
                     type="button"
                     text="Guardar"
@@ -344,7 +348,7 @@ const addProcedure = () => {
                                 </div>
                                 <div class="px-3">
                                     <button
-                                        @click.prevent="closeModal"
+                                        @click.prevent="clear"
                                         type="button"
                                         class="flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                     >

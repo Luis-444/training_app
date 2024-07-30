@@ -67,3 +67,5 @@ export const defaultEmployee: Employee = {
     procedures: [],
     department: defaultDepartment
 }
+
+export const employees = ref<Employee[]>([]);
