@@ -5,7 +5,7 @@ import { Department, defaultDepartment } from "../types";
 import Main from "../layouts/Main.vue";
 import Modal from "../components/Modal.vue";
 import TextInput from "../components/TextInput.vue";
-import { UserIcon, UsersIcon } from "@heroicons/vue/20/solid";
+import { PencilSquareIcon, TrashIcon, UserIcon, UsersIcon } from "@heroicons/vue/24/solid";
 import PrimaryButton from "../components/buttons/PrimaryButton.vue";
 import DangerButton from "../components/buttons/DangerButton.vue";
 import { copyJson } from "../utils/commons";
@@ -103,49 +103,37 @@ const DeleteDepartment = () => {
         <template #actionSlot>
             <PrimaryButton type="button" @click="openCreateModal" text="Nuevo departamento" />
         </template>
-        <div class="flex flex-col overflow-x-auto">
-            <div class="">
-                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                    <div class="overflow-x-auto">
-                        <table class="text-sm font-light text-left">
-                            <thead class="font-medium border-b dark:border-neutral-500">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4">
-                                        Acciones
-                                    </th>
-                                    <th scope="col" class="px-6 py-4">
-                                        Abreviatura:
-                                    </th>
-                                    <th scope="col" class="px-6 py-4">
-                                        Nombre:
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="dep in departments" :key="dep.id" class="border-b dark:border-neutral-500">
-                                    <td class="flex px-6 py-4 whitespace-nowrap">
-                                        <!-- Botón para abrir el modal -->
-                                        <button @click="openEdithModal"
-                                            class="flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Editar
-                                        </button>
-                                        <button @click="openDeleteModal"
-                                            class="flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Eliminar
-                                        </button>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ dep.abbreviation }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ dep.name }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="w-full flex-1 overflow-auto p-2">
+            <table class="w-full">
+                <thead>
+                    <tr>
+                        <th class="w-[100px]">
+                        </th>
+                        <th>
+                            Abreviatura:
+                        </th>
+                        <th>
+                            Nombre:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="dep in departments" :key="dep.id">
+                        <td>
+                            <div class="flex items-center justify-center gap-2">
+                                <PencilSquareIcon @click="openEdithModal" class="icon__pointer" />
+                                <TrashIcon @click="openDeleteModal" class="icon__pointer" />
+                            </div>
+                        </td>
+                        <td>
+                            {{ dep.abbreviation }}
+                        </td>
+                        <td>
+                            {{ dep.name }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <Modal :showing="showCreateModal" :close="clear">
             <template #title>

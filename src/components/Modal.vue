@@ -12,8 +12,8 @@ defineProps<{
         <div v-show="showing"
             class="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-40">
             <OnClickOutside @trigger="close"
-                class="w-full max-w-[600px] bg-gray-900 rounded shadow border border-gray-700">
-                <div class="flex items-center justify-between w-full px-4 py-2 bg-gray-950">
+                class="w-full max-w-[600px] bg-white rounded-md shadow overflow-hidden">
+                <div class="flex items-center justify-between w-full px-4 py-2 bg-customBanner">
                     <slot name="title" />
                     <XMarkIcon @click="close"
                         class="text-gray-300 transition-transform cursor-pointer size-6 min-w-6 hover:scale-105" />
@@ -21,7 +21,7 @@ defineProps<{
                 <div class="flex flex-col gap-2 px-4 py-2">
                     <slot name="content" />
                 </div>
-                <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+                <div class="flex items-center justify-end gap-2 p-4 border-t">
                     <slot name="footer" />
                 </div>
             </OnClickOutside>

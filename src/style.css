@@ -69,6 +69,34 @@ button:focus-visible {
   text-align: center; */
 }
 
+table {
+  @apply w-full;
+}
+
+svg {
+  @apply size-6;
+}
+
+.icon__pointer {
+  @apply hover:scale-110 cursor-pointer transition-all duration-300;
+}
+
+thead tr  {
+  @apply bg-customBanner text-white
+}
+
+th {
+  @apply text-left font-semibold px-2;
+}
+
+tbody tr {
+  @apply even:bg-gray-50 odd:bg-gray-100
+}
+
+td {
+  @apply py-1 px-2;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
