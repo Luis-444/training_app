@@ -16,7 +16,6 @@ import { Department } from "../types";
 import { copyJson } from "../utils/commons";
 
 import { PencilSquareIcon, TrashIcon, UserIcon, PlusIcon } from "@heroicons/vue/24/solid";
-import axios from "axios";
 
 const employee = ref<Employee>(copyJson(defaultEmployee));
 
@@ -32,6 +31,7 @@ const loading = ref(false);
 const errors = ref({
     name: "",
     initials: "",
+    trainner_email: "",
     employee_number: "",
 });
 
@@ -174,6 +174,9 @@ const addProcedure = () => {
                             Numero de empleado:
                         </th>
                         <th>
+                            Email de entrenador:
+                        </th>
+                        <th>
                             Departamento:
                         </th>
                         <th>
@@ -200,6 +203,9 @@ const addProcedure = () => {
                             {{ emp.employee_number }}
                         </td>
                         <td>
+                            {{ emp.trainner_email }}
+                        </td>
+                        <td>
                             {{ emp.department?.name ?? "No asigado" }}
                         </td>
                         <td>
@@ -209,7 +215,7 @@ const addProcedure = () => {
                 </tbody>
             </table>
         </div>
-        <Modal :showing="showCreateModal" :close="clear">
+        <Modal :showing="showCreateModal">
             <template #title>
                 <h2 class="text-lg font-medium text-white">
                     {{
@@ -222,6 +228,8 @@ const addProcedure = () => {
                     v-model="employee.name" />
                 <TextInput :error="errors.initials" :icon="UserIcon" type="text" id="initials" text="Iniciales"
                     label="Iniciales" v-model="employee.initials" />
+                <TextInput :error="errors.trainner_email" :icon="UserIcon" type="text" id="trainner_email" text="Email"
+                    label="Email" v-model="employee.trainner_email" />
                 <TextInput :error="errors.employee_number" :icon="UserIcon" type="text" id="employee_number"
                     text="Numero de empleado" label="Numero de empleado" v-model="employee.employee_number" />
                 <label for="">Seleccionar departamento</label>
@@ -257,7 +265,7 @@ const addProcedure = () => {
                 <DangerButton type="button" @click="clear" text="Cancelar" />
             </template>
         </Modal>
-        <Modal :showing="showProcedureModal" :close="clear">
+        <Modal :showing="showProcedureModal">
             <template #title>
                 <h2 class="text-lg font-medium text-white">
                     Agregar procedimiento
