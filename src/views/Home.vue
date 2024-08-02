@@ -7,7 +7,7 @@ import { Employee, Procedure } from '../types';
 const columns = ref([
     "Numero de empleado",
     "Iniciales",
-    ["Descripcion", "Nombre del empleado", "Numero de procedimiento"],
+    "Nombre del empleado",
     "Job description",
 ]);
 
@@ -32,43 +32,42 @@ onMounted(() => {
 
 <template>
     <Main>
-        <table>
-            <thead>
-                <tr class="truncate">
-                    <th class="border" v-for="(column, index) in columns" :key="index">
-                        <template v-if="Array.isArray(column)">
-                            <table>
-                                <tr
-                                    class="border"
-                                    v-for="(subColumn, index) in column"
-                                    :key="index"
-                                >
-                                    <td>{{ subColumn }}</td>
-                                </tr>
-                            </table>
-                        </template>
-                        <span v-else>
-                            {{ column }}
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="employee in employees" :key="employee.id">
-                    <td>{{ employee.employee_number }}</td>
-                    <td>{{ employee.initials }}</td>
-                    <td>{{ employee.name }}</td>
-                    <td>{{ employee.department?.abbreviation }}</td>
-                    <td v-for="p in procedures">
-                        <span v-for="procedure in employee.procedures" :key="procedure.id">
-                            <template v-if="p.id === procedure.id">
-                                <span class="block mx-auto bg-green-500 rounded-full size-6" />
+        <div class="w-full flex-1 overflow-auto p-2">
+            <table class="min-w-full bg-white border-collapse">
+                <thead>
+                    <tr class="bg-gray-500 text-white">
+                        <th class="border px-4 py-2" v-for="(column, index) in columns" :key="index">
+                            <template v-if="Array.isArray(column)">
+                                <table class="min-w-full">
+                                    <tr class="border bg-gray-500 text-white" v-for="(subColumn, index) in column" :key="index">
+                                        <td class="px-4 py-2 text-center">{{ subColumn }}</td>
+                                    </tr>
+                                </table>
                             </template>
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            <span v-else>
+                                {{ column }}
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="employee in employees" :key="employee.id"
+                        class="odd:bg-gray-100 even:bg-gray-200 hover:bg-gray-300">
+                        <td class="border px-4 py-2">{{ employee.employee_number }}</td>
+                        <td class="border px-4 py-2">{{ employee.initials }}</td>
+                        <td class="border px-4 py-2">{{ employee.name }}</td>
+                        <td class="border px-4 py-2">{{ employee.department?.abbreviation }}</td>
+                        <td class="border px-4 py-2" v-for="p in procedures">
+                            <span v-for="procedure in employee.procedures" :key="procedure.id">
+                                <template v-if="p.id === procedure.id">
+                                    <span class="block mx-auto bg-green-500 rounded-full h-6 w-6"></span>
+                                </template>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </Main>
 </template>
 <style scoped>

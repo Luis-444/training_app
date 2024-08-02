@@ -102,14 +102,19 @@ const getEmployees = () => {
 };
 
 const createEmployee = () => {
+    loading.value = true;
     axiosClient
         .post("employees", employee.value)
         .then((response) => {
             if (response.data.error) return;
             console.log("Creado correctamente");
+            getEmployees();
+            clear();
         })
         .catch((error) => {
             console.log("Error al crear", error.response.data);
+        }).finally(() => {
+            loading.value = false;
         });
 };
 
@@ -145,6 +150,7 @@ const addProcedure = () => {
     axiosClient.post('add_procedure', data).then((response) => {
         if (response.data.error) return;
         employee.value.procedures.push(procedure.value);
+        getEmployees();
         clear();
         console.log("Procedimiento agregado correctamente");
     }).catch((error) => {
@@ -156,7 +162,7 @@ const addProcedure = () => {
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton type="button" @click="openCreateModal" text="Nuevo empleado" />
+            <PrimaryButton textColor="text-black" class="bg-white" type="button" @click="openCreateModal" text="Nuevo empleado" />
         </template>
         <div class="w-full flex-1 overflow-auto p-2">
             <table class="w-full">
@@ -241,27 +247,9 @@ const addProcedure = () => {
                         {{ department.name }}
                     </option>
                 </select>
-                <!-- <div class="mb-5">
-                    <label for="">Agregar procedimientos</label>
-                    <select v-model="procedure"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        required>
-                        <option value="">Selecciona un procedimiento</option>
-                        <option v-for="procedure in procedures" :key="procedure.id" :value="procedure">
-                            {{ procedure.name }}
-                        </option>
-                    </select>
-                    <PrimaryButton @click="addProcedure" type="button" text="Agregar procedimiento" />
-
-                    <ul>
-                        <li v-for="p in employee.procedures">
-                            {{ p.name }}
-                        </li>
-                    </ul>
-                </div> -->
             </template>
             <template #footer>
-                <PrimaryButton :loading="loading" @click="createEmployee" type="button" text="Guardar" />
+                <PrimaryButton class="text-white" @click="createEmployee" type="button" text="Guardar" />
                 <DangerButton type="button" @click="clear" text="Cancelar" />
             </template>
         </Modal>

@@ -97,6 +97,12 @@ td {
   @apply py-1 px-2;
 }
 
+.rotate-text {
+  @apply h-24 w-8 whitespace-nowrap align-bottom px-2;
+  transform: rotate(-90deg);
+  transform-origin: bottom left;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

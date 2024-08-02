@@ -101,7 +101,7 @@ const DeleteDepartment = () => {
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton type="button" @click="openCreateModal" text="Nuevo departamento" />
+            <PrimaryButton textColor="text-black" class="bg-white text-black" type="button" @click="openCreateModal" text="Nuevo departamento" />
         </template>
         <div class="w-full flex-1 overflow-auto p-2">
             <table class="w-full">
@@ -146,11 +146,9 @@ const DeleteDepartment = () => {
                     v-model="department.name" />
                 <TextInput :error="errors.abbreviation" :icon="UsersIcon" type="text" id="abbreviation"
                     text="Abreviacion" label="Abreviacion" v-model="department.abbreviation" />
-                <TextInput :error="errors.procedure_id" :icon="UserIcon" type="text" id="procedure_id"
-                    text="procedure_id" label="procedure_id" v-model="department.procedure_id" />
             </template>
             <template #footer>
-                <PrimaryButton :loading="loading" @click="createDepartment" type="button" text="Guardar" />
+                <PrimaryButton class="text-white" :loading="loading" @click="createDepartment" type="button" text="Guardar" />
                 <DangerButton type="button" @click="clear" text="Cancelar" />
             </template>
         </Modal>

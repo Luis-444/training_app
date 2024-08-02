@@ -103,7 +103,7 @@ const DeleteProcedure = () => {
 <template>
     <Main>
         <template #actionSlot>
-            <PrimaryButton :type="'button'" @click="openCreateModal" text="Nuevo Procedimineto" />
+            <PrimaryButton textColor="text-black" class="bg-white text-black" :type="'button'" @click="openCreateModal" text="Nuevo Procedimineto" />
         </template>
         <!-- Tabla de departamnetos -->
         <div class="w-full flex-1 overflow-auto p-2">
@@ -144,7 +144,7 @@ const DeleteProcedure = () => {
                     text="Abreviacion" label="Abreviacion" v-model="procedure.acm_number" />
             </template>
             <template #footer>
-                <PrimaryButton :loading="loading" @click="createProcedure" type="button" text="Guardar" />
+                <PrimaryButton class="text-white" :loading="loading" @click="createProcedure" type="button" text="Guardar" />
                 <DangerButton type="button" @click="clear" text="Cancelar" />
             </template>
         </Modal>
